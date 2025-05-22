@@ -1,4 +1,4 @@
-package com.jogodavelha.jogodavelha;
+package com.jogodavelha.jogodavelha.model;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -26,7 +26,7 @@ public class JogoDaVelha { //variaveis
 	}
 	
 	//metodo para fazer a jogada
-	private boolean fazerJogada(int linha, int coluna){
+	public boolean fazerJogada(int linha, int coluna){
 		if (linha >= 0 && linha < 3 && coluna >=0  && coluna < 3 && tabuleiro[linha][coluna] == '-'){ 
 			//é utilizada == inves de equals devido utilizar char e '';
 			tabuleiro[linha][coluna] = jogadorAtual; //a posição que foi passada como parametro receber o valor de jogador
