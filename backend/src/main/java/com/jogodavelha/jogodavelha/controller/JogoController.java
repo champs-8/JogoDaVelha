@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jogodavelha.jogodavelha.model.JogoDaVelha;
+import com.jogodavelha.jogodavelha.services.JogoService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,23 +16,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/") //rota padrão
 @CrossOrigin(origins = "*") //para permitir o acesso de qualquer origem
 @SuppressWarnings("unused") //para não dar warning de variaveis não utilizadas
-public class JogoDaVelhaController {
-    private JogoDaVelha jogoDaVelha = new JogoDaVelha(); //instancia do jogo da velha
+public class JogoController {
+
+    @Autowired
+    private JogoService jogoService;
 
     @GetMapping("/start")
     public JogoDaVelha start() {
-        jogoDaVelha = new JogoDaVelha(); //inicializa o jogo
-        return jogoDaVelha; //retorna o jogo
+        return jogoService.iniciarNovoJogo(); //inicia um novo jogo e retorna o objeto JogoDaVelha
     }
 
     @PostMapping("/play")
     public JogoDaVelha play(@RequestParam int row, @RequestParam int col) {
-        jogoDaVelha.fazerJogada(row, col); //faz a jogada
-        return jogoDaVelha; //retorna o jogo
+        jogoService.fazerJogada(row, col); //faz a jogada com as coordenadas passadas
+        return jogoService.getJogo(); //retorna o jogo
     }
 
     @GetMapping("/status")
     public JogoDaVelha status() {
-        return jogoDaVelha; //retorna o status do jogo
+        return jogoService.getJogo(); //retorna o status do jogo
     }
 }

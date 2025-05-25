@@ -1,0 +1,2 @@
+rodar spring mvn spring-boot:run
+mvn clean package - compilar projeto
