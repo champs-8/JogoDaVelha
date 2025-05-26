@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
-@RequestMapping("/api") //rota padrão
+@RequestMapping("/") //rota padrão
 @CrossOrigin(origins = "*") //para permitir o acesso de qualquer origem
 @SuppressWarnings("unused") //para não dar warning de variaveis não utilizadas
 public class JogoController {
@@ -28,7 +28,7 @@ public class JogoController {
     @GetMapping("/") //mostrar a mensagem de status da API
     public Map<String, String> statusRoot() {
         Map<String, String> resposta = new HashMap<>();
-        resposta.put("mensagem", "API do Jogo da Velha está ativa!");
+        resposta.put("mensagem", "API  Jogo da Velha está ativa!");
         return resposta;
     }
 
