@@ -25,7 +25,7 @@ public class JogoController {
     @Autowired
     private JogoService jogoService;
 
-    @GetMapping("/") //mostrar a mensagem de status da API
+    @GetMapping("/api") //mostrar a mensagem de status da API
     public Map<String, String> statusRoot() {
         Map<String, String> resposta = new HashMap<>();
         resposta.put("mensagem", "API  Jogo da Velha está ativa!");
