@@ -1,2 +1,3 @@
 rodar spring mvn spring-boot:run
 mvn clean package - compilar projeto
+biblioteca logger para verificar prints

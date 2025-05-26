@@ -1,18 +1,24 @@
 package com.jogodavelha.jogodavelha.services;
 
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jogodavelha.jogodavelha.model.JogoDaVelha;
 
 @Service // Anotação para indicar que esta classe é um serviço
 public class JogoService {
 
+	private static final Logger logger = LoggerFactory
+	.getLogger(JogoService.class); // Logger para registrar informações de depuração e erros
     private JogoDaVelha jogo; // Instância do jogo da velha
 
 	public JogoDaVelha iniciarNovoJogo() {
 		jogo = new JogoDaVelha(); // Cria uma nova instância do jogo da velha
 		return jogo; // Retorna o objeto JogoDaVelha
 	}
+
+
 	//metodo para fazer a jogada
 	public void fazerJogada(int linha, int coluna){
 		if(jogo.getStatus().equals("FINALIZADO") ||
@@ -25,7 +31,7 @@ public class JogoService {
 		char jogadorAtual = jogo.getJogadorAtual(); //obtendo o jogador atual
 
 
-		if (linha >= 0 && linha < 3 && coluna >=0  && coluna < 3 && tabuleiro[linha][coluna] == '-'){ 
+		if (linha >= 0 && linha < 3 && coluna >=0  && coluna < 3 && tabuleiro[linha][coluna] == '-'){
 			//é utilizada == inves de equals devido utilizar char e '';
 			tabuleiro[linha][coluna] = jogadorAtual; //a posição que foi passada como parametro receber o valor de jogador
 			
@@ -33,6 +39,7 @@ public class JogoService {
 				jogo.setStatus("VENCEDOR: "+jogadorAtual); //se o jogador atual ganhou
 			} else if (verificarEmpate(tabuleiro)) {
 				jogo.setStatus("EMPATE"); //se deu empate
+
 			} else {
 				jogo.setJogadorAtual((jogadorAtual == 'X') ? 'O' : 'X'); //se não ganhou nem deu empate, troca o jogador atual
 			}
