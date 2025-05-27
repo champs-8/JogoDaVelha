@@ -1,4 +1,6 @@
-const API_URL = 'https://jogodavelha-xks4.onrender.com';
+// const API_URL = 'https://jogodavelha-xks4.onrender.com';
+const API_URL = 'http://localhost:8080'; //url de teste
+
 const tabuleiro = document.getElementById('tabuleiro');
 
 function criarTabuleiro(){
@@ -17,10 +19,10 @@ function criarTabuleiro(){
 }
 
 function fazerJogada(row, col){
-    fetch(`${API_URL}/play?row=${row}&col${col}`) //requisição
+    fetch(`${API_URL}/play?row=${row}&col=${col}`) //requisição
     .then(res => {
         if(!res.ok) throw new Error('Erro na jogada'); //fetch não trata erro 404
-        return res.json;
+        return res.json();
     })
     .then(data => atualizarTabuleiro(data))
     .catch(err => console.error(err));

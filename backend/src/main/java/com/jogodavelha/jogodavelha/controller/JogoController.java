@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/") //rota padrão
-@CrossOrigin(origins = "*") //para permitir o acesso de qualquer origem
+// @CrossOrigin(origins = "https://champs-8.github.io") //para permitir o acesso de qualquer origem
+// @CrossOrigin(origins = "http://127.0.0.1:5500/") //acesso para testes
 @SuppressWarnings("unused") //para não dar warning de variaveis não utilizadas
 public class JogoController {
 
