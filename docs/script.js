@@ -8,7 +8,7 @@ function criarTabuleiro(){
             let celula = document.createElement('div'); //cria elemento celula
             celula.setAttribute('class', 'celula'); //define a classe
             celula.setAttribute('id', `celula${r}${c}`); //adiciona o id
-            tabuleiro.appendChild(celula); //insere na div 
+            tabuleiro.appendChild(celula); //insere na div
 
             //quando clicar em cada div, terá que fazer a chamada da requisição
             celula.addEventListener('click', () => fazerJogada(r, c));
