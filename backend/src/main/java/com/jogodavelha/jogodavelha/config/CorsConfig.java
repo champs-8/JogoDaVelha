@@ -1,4 +1,4 @@
-package main.java.com.jogodavelha.jogodavelha.config;
+package com.jogodavelha.jogodavelha.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;

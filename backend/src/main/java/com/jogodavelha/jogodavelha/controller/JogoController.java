@@ -40,6 +40,7 @@ public class JogoController {
 
     @PostMapping("/play")
     public JogoDaVelha play(@RequestParam int row, @RequestParam int col) {
+        System.out.println("Jogada recebida: row=" + row + ", col=" + col);
         jogoService.fazerJogada(row, col); //faz a jogada com as coordenadas passadas
         return jogoService.getJogo(); //retorna o jogo
     }

@@ -19,7 +19,9 @@ function criarTabuleiro(){
 }
 
 function fazerJogada(row, col){
-    fetch(`${API_URL}/play?row=${row}&col=${col}`) //requisição
+    fetch(`${API_URL}/play?row=${row}&col=${col}`,{
+        method: 'POST', //método da requisição
+    }) //requisição
     .then(res => {
         if(!res.ok) throw new Error('Erro na jogada'); //fetch não trata erro 404
         return res.json();
