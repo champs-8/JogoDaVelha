@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import com.jogodavelha.jogodavelha.model.JogoDaVelha;
 
-import main.java.com.jogodavelha.jogodavelha.exception.JogoNaoIniciadoException;
+import com.jogodavelha.jogodavelha.exception.JogoNaoIniciadoException;
 
 @Service // Anotação para indicar que esta classe é um serviço
 public class JogoService {
@@ -23,17 +23,18 @@ public class JogoService {
 
 	//metodo para fazer a jogada
 	public void fazerJogada(int linha, int coluna){
+		if (jogo == null) {
+			throw new JogoNaoIniciadoException("O jogo ainda não foi iniciado. Use a rota /start.");
+		}
+		
 		if(jogo.getStatus().equals("FINALIZADO") ||
 			jogo.getStatus().startsWith("VENCEDOR") ||
 			jogo.getStatus().equals("EMPATE")) {
 			return;
 		}
 		//tratamento de exceção para verificar se o jogo foi iniciado
-		if (jogo == null) {
-			throw new JogoNaoIniciadoException("O jogo ainda não foi iniciado. Use a rota /start.");
-		}
 		
-		char[][] tabuleiro =jogo.getTabuleiro(); //obtendo o tabuleiro atual
+		Character[][] tabuleiro =jogo.getTabuleiro(); //obtendo o tabuleiro atual
 		char jogadorAtual = jogo.getJogadorAtual(); //obtendo o jogador atual
 
 
@@ -58,13 +59,12 @@ public class JogoService {
 	}
 	
 	//verificar Vitoria
-	private boolean verificarVitoria(char[][] tabuleiro, char jogador){
+	private boolean verificarVitoria(Character[][] tabuleiro, char jogador){
 		for (int i = 0; i < 3; i++ ){
 			//verificando vitoria na horizontal e vertical
 			if ((tabuleiro[i][0] == jogador && tabuleiro[i][1] == jogador && tabuleiro[i][2] == jogador) ||
 				(tabuleiro[0][i] == jogador && tabuleiro[1][i] == jogador && tabuleiro[2][i] == jogador)) {
-				return true;
-        	}
+				return true;}
 		}
 
 		//verificarndo na diagonal
@@ -78,7 +78,7 @@ public class JogoService {
 		return false; //ninguem ganhou
 	}
 
-	private boolean verificarEmpate(char[][] tabuleiro){
+	private boolean verificarEmpate(Character[][] tabuleiro){
 		for (int i = 0; i < 3; i++){
 			for (int j = 0; j < 3; j++ ){
 				if (tabuleiro[i][j] == '-') return false;

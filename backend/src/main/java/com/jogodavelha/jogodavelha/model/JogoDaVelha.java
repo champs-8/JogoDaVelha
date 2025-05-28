@@ -1,12 +1,15 @@
 package com.jogodavelha.jogodavelha.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class JogoDaVelha { //variaveis
-	private char[][] tabuleiro; //pode-se usar char, devido ser apenas 1 caractere;
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY) //para formatar o tabuleiro como um array no JSON
+	private Character[][] tabuleiro; //pode-se usar char, devido ser apenas 1 caractere;
 	private char jogadorAtual;
 	private String status; //status do jogo, se está em andamento ou não
 	
 	public JogoDaVelha() { //construtor da classe
-		tabuleiro = new char[3][3];
+		tabuleiro = new Character[3][3];
 		jogadorAtual = 'X';
 		status = "IN_PROGRESS";
 		inicializarTabuleiro();
@@ -21,7 +24,7 @@ public class JogoDaVelha { //variaveis
 	}
 
 	//getters
-	public char[][] getTabuleiro() {
+	public Character[][] getTabuleiro() {
 		return tabuleiro;
 	}
 	public char getJogadorAtual() {
