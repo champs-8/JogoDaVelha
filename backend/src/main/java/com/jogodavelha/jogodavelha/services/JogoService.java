@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import com.jogodavelha.jogodavelha.model.JogoDaVelha;
 
+import main.java.com.jogodavelha.jogodavelha.exception.JogoNaoIniciadoException;
+
 @Service // Anotação para indicar que esta classe é um serviço
 public class JogoService {
 
@@ -26,6 +28,10 @@ public class JogoService {
 			jogo.getStatus().equals("EMPATE")) {
 			return;
 		}
+		//tratamento de exceção para verificar se o jogo foi iniciado
+		if (jogo == null) {
+			throw new JogoNaoIniciadoException("O jogo ainda não foi iniciado. Use a rota /start.");
+		}
 		
 		char[][] tabuleiro =jogo.getTabuleiro(); //obtendo o tabuleiro atual
 		char jogadorAtual = jogo.getJogadorAtual(); //obtendo o jogador atual
@@ -43,6 +49,7 @@ public class JogoService {
 			} else {
 				jogo.setJogadorAtual((jogadorAtual == 'X') ? 'O' : 'X'); //se não ganhou nem deu empate, troca o jogador atual
 			}
+
 		}
 	}
 	

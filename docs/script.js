@@ -3,14 +3,14 @@ const API_URL = 'http://localhost:8080'; //url de teste
 
 const tabuleiro = document.getElementById('tabuleiro');
 
-function renderTabuleiro(){
+function renderTabuleiro(tabuleiroData){
     //montar o tabuleiro quando carregar o js
     for(let r = 0; r < 3; r++){
         for(let c = 0; c < 3; c++){
             let celula = document.createElement('div'); //cria elemento celula
             celula.setAttribute('class', 'celula'); //define a classe
             celula.setAttribute('id', `celula${r}${c}`); //adiciona o id
-            celula.textContent = tabuleiro[r][c] || "-" ; //irá receber as posições clicadas quando renderizar
+            celula.textContent = tabuleiroData[r][c] || "-" ; //irá receber as posições clicadas quando renderizar
             tabuleiro.appendChild(celula); //insere na div
 
             //quando clicar em cada div, terá que fazer a chamada da requisição
@@ -31,8 +31,8 @@ async function fazerJogada(row, col){
     .catch(err => console.error(err));
 }
 
-async window.onload = function(){ //irá carregar o tabuleiro na API quando carregar o script
-    await fetch(`${API_URL}/start`)
+window.onload = function(){ //irá carregar o tabuleiro na API quando carregar o script
+    fetch(`${API_URL}/start`) //inicia a instancia na api
     .then(res => res.json())
     .then(data => renderTabuleiro(data.tabuleiro))
     .catch(err => console.error(`Erro ao carregar o estado inicial: ${err}`));
