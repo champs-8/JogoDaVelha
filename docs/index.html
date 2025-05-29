@@ -7,14 +7,24 @@
     <title>Jogo da Velha</title>
 </head>
 <body>
+    <header id="header" class="flex">
+        <!-- <img src="#" alt=""> -->
+         <span>Imagem</span>
+        <span>Version</span>
+    </header>
     <section id="hero" class="flex">
         <h1>Jogo da velha</h1>
-        <div id="tabuleiro" class="flex tabuleiro">
-            <!-- aqui será gerado o tabuleiro pelo JS -->
+        <div id="contentHero" class="flex">
+            <div id="status" class="flex">status</div>
+            <div id="tabuleiro" class="flex tabuleiro">
+                <!-- aqui será gerado o tabuleiro pelo JS -->
+            </div>
+            <div id="winner" class="flex">Vencedor X</div>
         </div>
+        <button id="btnPlay">Começe o jogo</button>
     </section>
-    <footer id="footer">
-        <!-- aqui será as informações do criador -->
+    <footer class="flex">
+        Created by <a href="https://instagram.com/fabio.s8">&nbsp; Fábio Santos </a> &nbsp;|| ÇHÄMP$ &#9415; 2025
     </footer>
     <script src="./script.js"></script>
 </body>
