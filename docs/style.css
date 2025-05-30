@@ -14,6 +14,7 @@
   display: flex;
 }
 body{
+  font-family: "Playpen Sans Deva", cursive;
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -37,6 +38,8 @@ header{
 }
 #hero h1{
   font-size: 3em;
+  align-items: center;
+  height: 10vh;
 }
 #contentHero{
   flex-direction: column;
@@ -47,10 +50,13 @@ header{
   border-radius: 10px;
 }
 #status, #winner{
-  font-size: 2.5em;
+  height: 8vh;
+  font-size: 2em;
+  font-weight: 200;
 }
 .tabuleiro {
   display: grid;
+  box-sizing: border-box;
   background-color: black;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
@@ -66,6 +72,7 @@ header{
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  border: none;
 }
 .celula:active{
   transform: scale(.9);
@@ -80,11 +87,14 @@ header{
   background-color: var(--azul2);
   color: var(--azul5);
 }
-#btnPlay:hover, #btnPlay:active{
+#btnPlay:hover{
   background-color: var(--azul3);
   transform: scale(1.05);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+}
+#btnPlay:active{
+  transform: scale(0.95);
 }
 footer {
   justify-content: center;
@@ -93,18 +103,44 @@ footer {
 footer a{
   text-decoration: none;
 }
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.vencedora {
+    animation: pulsar 0.3s ease-in-out;
+}
 
-/* Responsavidade para mobile */
+/*============= Responsavidade para mobile =========*/
+@media (max-width: 440px) {
+  header{
+  justify-content: space-between;
+  padding: 0 5em 0 5em;
+  background-color: var(--azul1);
+  width: 100vw;
+  height: 10vh;
+  color: #E0E1DD;
+}
+#contentHero{
+  width: 80vw;
+  min-width: 200px;
+  height: auto;
+}
 .tabuleiro {
-  display: grid;
   box-sizing: border-box;
-  grid-template-columns: repeat(3, 85px);
-  grid-template-rows: repeat(3, 85px);
+  grid-template-columns: repeat(3, minmax(70px, 1fr));
+  grid-template-rows: repeat(3, minmax(70px, 1fr));
   gap: 5px;
   margin: 20px auto;
   width: max-content;
 }
-@media (max-width: 440px) {
   #hero{
       justify-content: center;
   }
@@ -113,5 +149,40 @@ footer a{
   }
   #status, #winner{
     font-size: 2em;
+  }
+
+  #btnPlay:hover{
+    transform: none;
+  }
+  #btnPlay:active{
+    transition: all 0.2s ease-in-out;
+    background-color: var(--azul3);
+    transform: scale(0.95);
+  }
+  footer {
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1em;
+    padding: 0 .7em 1.5em 0.7em;
+    text-align: center;
+  }
+}
+@media (max-width: 350px){
+  header{
+    padding: 0 2em;
+    height: 12vh;
+  }
+    #hero h1{
+    font-size: 2em;
+  }
+  #status, #winner{
+    font-size: 1.3em;
+    height: auto;
+  }
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 1em;
+    font-size: 1em;
   }
 }
