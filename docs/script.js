@@ -1,5 +1,5 @@
-const API_URL = 'https://jogodavelha-xks4.onrender.com';
-// const API_URL = 'http://localhost:8080'; //url de teste
+// const API_URL = 'https://jogodavelha-xks4.onrender.com';
+const API_URL = 'http://localhost:8080'; //url de teste
 
 const tabuleiro = document.getElementById('tabuleiro');
 
