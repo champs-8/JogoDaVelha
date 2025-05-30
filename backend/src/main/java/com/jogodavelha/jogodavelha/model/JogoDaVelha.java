@@ -11,7 +11,7 @@ public class JogoDaVelha { //variaveis
 	public JogoDaVelha() { //construtor da classe
 		tabuleiro = new Character[3][3];
 		jogadorAtual = 'X';
-		status = "IN_PROGRESS";
+		status = "EM ANDAMENTO"; //status inicial do jogo
 		inicializarTabuleiro();
 	}
 
