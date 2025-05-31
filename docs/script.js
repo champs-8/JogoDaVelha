@@ -34,18 +34,19 @@ function fazerJogada(row, col){
     let winner = document.getElementById('winner');
     let btnPlay = document.getElementById('btnPlay');
 
-    //ativa o botão de reiniciar o jogo
+    // inicia desativado e ativa o botão de reiniciar o jogo a partir da primeira jogada
     btnPlay.style.visibility = 'visible';
 
+    //requisição
     fetch(`${API_URL}/play?row=${row}&col=${col}`,{
         method: 'POST', //método da requisição
-    }) //requisição
+    }) 
     .then(res => {
         if(!res.ok) throw new Error('Erro na jogada'); //fetch não trata erro 404
         return res.json();
     })
     .then(data => {
-        // console.log("Resposta da API:", data); // <- verifique o formato aqui
+        // console.log("Resposta da API:", data); // para testes de retorno data
 
         renderTabuleiro(data.tabuleiro, data.jogadorAtual);
 
@@ -60,27 +61,31 @@ function fazerJogada(row, col){
     .catch(err => console.error(err));
 }
 
-window.onload = function(){ //irá carregar o tabuleiro na API quando carregar o script
-    fetch(`${API_URL}/start`) //inicia a instancia na api
-    .then(res => res.json())
-    .then(data => renderTabuleiro(data.tabuleiro))
-    .catch(err => console.error(`Erro ao carregar o estado inicial: ${err}`));
-}
-
-//Função para começar o jogo pelo botão
-const btnPlay = document.getElementById('btnPlay');
-btnPlay.addEventListener('click', () => {
+// Função genérica para iniciar o jogo
+function iniciarJogo() {
     fetch(`${API_URL}/start`)
-    .then(res => res.json())
-    .then(data => {
-        renderTabuleiro(data.tabuleiro);
-        document.getElementById('status').textContent = 'X O'; //texto inicial do status
-        document.getElementById('winner').textContent = `VEZ DE ${data.jogadorAtual}`; // atualiza o jogador atual
-    })
-    .catch(err => console.error(`Erro ao iniciar o jogo: ${err}`));
-});
+        .then(res => res.json())
+        .then(data => {
+            renderTabuleiro(data.tabuleiro);
 
-//transforme scale
+            // Atualiza os elementos DOM apenas se existirem (evita erro no load inicial)
+            const status = document.getElementById('status');
+            const winner = document.getElementById('winner');
+
+            if (status) status.textContent = 'X O';
+            if (winner) winner.textContent = `VEZ DE ${data.jogadorAtual}`;
+        })
+        .catch(err => console.error(`Erro ao iniciar o jogo: ${err}`));
+}
+// Chamar ao carregar o script
+window.onload = iniciarJogo;
+
+// Chamar ao clicar no botão
+const btnPlay = document.getElementById('btnPlay');
+btnPlay.addEventListener('click', iniciarJogo);
+
+
+//transforme scale para destacar a linha quando tiver vitória
 function destacarVitoria(tabuleiroData, jogadorAtual) {
     // Verifica linhas
     for (let r = 0; r < 3; r++) {
