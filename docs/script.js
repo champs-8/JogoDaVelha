@@ -16,7 +16,8 @@ function renderTabuleiro(tabuleiroData){
 
             //verificação de conteúdo para aplicar cor na celula
             if (tabuleiroData[r][c] === 'X') {
-                celula.style.backgroundColor = '#1B263B'; // cor para X
+                celula.style.backgroundColor = '#1B263B'; // cor para X fundo
+                celula.style.color = 'white'; //cor para a fonte
             } else if(tabuleiroData[r][c] === 'O') {
                 celula.style.backgroundColor = '#778DA9'; // cor para O
             };
