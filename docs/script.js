@@ -63,19 +63,19 @@ function fazerJogada(row, col){
 
 // Função genérica para iniciar o jogo
 function iniciarJogo() {
+
+    // Atualiza os elementos DOM apenas se existirem (evita erro no load inicial)
+    const status = document.getElementById('status');
+    const winner = document.getElementById('winner');
+
     fetch(`${API_URL}/start`)
         .then(res => res.json())
         .then(data => {
             renderTabuleiro(data.tabuleiro);
-
-            // Atualiza os elementos DOM apenas se existirem (evita erro no load inicial)
-            const status = document.getElementById('status');
-            const winner = document.getElementById('winner');
-
-            if (status) status.textContent = 'X O';
             if (winner) winner.textContent = `VEZ DE ${data.jogadorAtual}`;
         })
-        .catch(err => console.error(`Erro ao iniciar o jogo: ${err}`));
+        .catch(err => console.error(`Erro ao iniciar o jogo: ${err}`))
+        .finally(status.textContent = 'X O')
 }
 // Chamar ao carregar o script
 window.onload = iniciarJogo;
@@ -83,6 +83,7 @@ window.onload = iniciarJogo;
 // Chamar ao clicar no botão
 const btnPlay = document.getElementById('btnPlay');
 btnPlay.addEventListener('click', iniciarJogo);
+
 
 
 //transforme scale para destacar a linha quando tiver vitória
