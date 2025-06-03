@@ -75,7 +75,9 @@ function iniciarJogo() {
             if (winner) winner.textContent = `VEZ DE ${data.jogadorAtual}`;
         })
         .catch(err => console.error(`Erro ao iniciar o jogo: ${err}`))
-        .finally(status.textContent = 'X O')
+        .finally(() => {
+            if(status) status.textContent = 'X O';
+        })
 }
 // Chamar ao carregar o script
 window.onload = iniciarJogo;
